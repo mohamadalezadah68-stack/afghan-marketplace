@@ -1,4 +1,4 @@
-# Afghan Marketplace — Random Joke Generator
+# afghan-marketplace
 
 A cheerful, responsive single-page joke generator. Click **Make me laugh** to fetch a random dad joke from the [icanhazdadjoke API](https://icanhazdadjoke.com/).
 
