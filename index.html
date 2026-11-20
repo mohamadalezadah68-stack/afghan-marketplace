@@ -3,32 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f6f1e8" />
-    <meta name="description" content="Get a fresh, random dad joke with one click." />
-    <title>Just one more joke</title>
-    <link rel="preconnect" href="https://icanhazdadjoke.com" />
+    <meta name="theme-color" content="#101a2b" />
+    <meta name="description" content="Current conditions and a seven-day forecast for cities around the world." />
+    <title>Atmos — Weather dashboard</title>
+    <link rel="preconnect" href="https://api.open-meteo.com" />
+    <link rel="preconnect" href="https://geocoding-api.open-meteo.com" />
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
   </head>
   <body>
-    <main class="page-shell">
-      <section class="joke-card" aria-labelledby="page-title">
-        <div class="sparkle sparkle-one" aria-hidden="true">✳</div>
-        <div class="sparkle sparkle-two" aria-hidden="true">✦</div>
-        <p class="eyebrow">A little laugh goes a long way</p>
-        <h1 id="page-title">Just one more <span>joke.</span></h1>
-        <div class="joke-area" aria-live="polite" aria-atomic="true">
-          <span class="quote-mark" aria-hidden="true">“</span>
-          <p id="joke" class="joke-text">Ready for a giggle?</p>
-        </div>
-        <p id="status" class="status" role="status">Tap the button and meet your next favorite joke.</p>
-        <button id="joke-button" class="joke-button" type="button">
-          <span>Make me laugh</span>
-          <span class="button-icon" aria-hidden="true">↗</span>
+    <main class="dashboard">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Atmos weather home">
+          <span class="brand-mark" aria-hidden="true">◒</span>
+          <span>atmos</span>
+        </a>
+        <form id="search-form" class="search-form" role="search">
+          <label class="visually-hidden" for="city-search">Search for a city</label>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="city-search" name="city" type="search" placeholder="Search a city…" autocomplete="off" required />
+          <button class="search-button" type="submit">Search</button>
+        </form>
+        <button id="location-button" class="location-button" type="button" aria-label="Use my current location" title="Use my current location">
+          <span aria-hidden="true">◎</span><span class="location-label">My location</span>
         </button>
-        <p class="credit">Random dad jokes, courtesy of <a href="https://icanhazdadjoke.com/" target="_blank" rel="noreferrer">icanhazdadjoke.com</a></p>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
+          <h1 id="page-title">The sky, <span>right now.</span></h1>
+        </div>
+        <div class="units" aria-label="Temperature units">
+          <button class="unit-button is-active" data-unit="celsius" type="button" aria-pressed="true">°C</button>
+          <button class="unit-button" data-unit="fahrenheit" type="button" aria-pressed="false">°F</button>
+        </div>
       </section>
-      <footer>Good vibes, no punchline required.</footer>
+
+      <p id="status" class="status" role="status" aria-live="polite">Finding the latest forecast…</p>
+
+      <section class="current-card" aria-label="Current weather">
+        <div class="current-main">
+          <div class="location-heading">
+            <span class="pin" aria-hidden="true">⌖</span>
+            <div>
+              <h2 id="place-name">Kabul</h2>
+              <p id="place-detail">Afghanistan · Local time</p>
+            </div>
+          </div>
+          <p id="updated-at" class="updated-at">Updating conditions…</p>
+          <div class="temperature-row">
+            <span id="current-icon" class="weather-icon" aria-hidden="true">⛅</span>
+            <div class="temperature-wrap">
+              <p class="temperature"><span id="current-temperature">—</span><span class="degree">°</span></p>
+              <p id="current-description" class="condition">Loading weather</p>
+            </div>
+          </div>
+          <p class="feels-like">Feels like <strong id="feels-like">—</strong></p>
+        </div>
+        <div class="current-side">
+          <p class="side-label">A little more detail</p>
+          <div class="detail-grid">
+            <article class="detail-item">
+              <span class="detail-icon" aria-hidden="true">⌁</span>
+              <div><p>Wind</p><strong id="wind-value">—</strong></div>
+            </article>
+            <article class="detail-item">
+              <span class="detail-icon" aria-hidden="true">◌</span>
+              <div><p>Humidity</p><strong id="humidity-value">—</strong></div>
+            </article>
+            <article class="detail-item">
+              <span class="detail-icon" aria-hidden="true">☂</span>
+              <div><p>Precipitation</p><strong id="precipitation-value">—</strong></div>
+            </article>
+            <article class="detail-item">
+              <span class="detail-icon" aria-hidden="true">☀</span>
+              <div><p>UV index</p><strong id="uv-value">—</strong></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="forecast-section" aria-labelledby="hourly-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">COMING UP</p><h2 id="hourly-title">Hourly forecast</h2></div>
+          <p class="section-note">Next 24 hours</p>
+        </div>
+        <div id="hourly-forecast" class="hourly-list" aria-live="polite"></div>
+      </section>
+
+      <section class="forecast-section week-section" aria-labelledby="week-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">PLAN AHEAD</p><h2 id="week-title">7-day forecast</h2></div>
+          <p class="section-note">Your week in weather</p>
+        </div>
+        <div id="daily-forecast" class="daily-list" aria-live="polite"></div>
+      </section>
+
+      <footer class="footer">
+        <span>Forecasts for wherever you are.</span>
+        <span>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></span>
+      </footer>
     </main>
   </body>
 </html>

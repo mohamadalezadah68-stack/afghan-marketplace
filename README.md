@@ -1,13 +1,17 @@
-# afghan-marketplace
+# Afghan Marketplace
 
-A cheerful, responsive single-page joke generator. Click **Make me laugh** to fetch a random dad joke from the [icanhazdadjoke API](https://icanhazdadjoke.com/).
+A responsive weather dashboard with live current conditions, an hourly forecast, and a 7-day outlook. Search for a city or allow location access to see local weather; switch between Celsius and Fahrenheit at any time.
 
 ## Run locally
 
-No build tools or API key are needed. Open `index.html` in a browser, or serve this directory with any static web server. An internet connection is required to fetch jokes and load the optional Google Fonts.
+Open `index.html` in a browser or serve this directory with any static web server. The dashboard needs an internet connection to fetch weather and optional Google Fonts. No API key or build step is required.
+
+## Weather data
+
+Forecasts and city search are provided by the free [Open-Meteo API](https://open-meteo.com/). Browser location is optional; Kabul is loaded by default.
 
 ## Files
 
-- `index.html` — accessible page structure
-- `styles.css` — responsive styling
-- `app.js` — API request, loading state, and error handling
+- `index.html` — accessible dashboard structure
+- `styles.css` — responsive dashboard styling
+- `app.js` — city search, location, unit conversion, and forecast rendering
