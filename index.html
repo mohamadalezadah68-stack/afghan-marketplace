@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f1e8" />
+    <meta name="description" content="Get a fresh, random dad joke with one click." />
+    <title>Just one more joke</title>
+    <link rel="preconnect" href="https://icanhazdadjoke.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="joke-card" aria-labelledby="page-title">
+        <div class="sparkle sparkle-one" aria-hidden="true">✳</div>
+        <div class="sparkle sparkle-two" aria-hidden="true">✦</div>
+        <p class="eyebrow">A little laugh goes a long way</p>
+        <h1 id="page-title">Just one more <span>joke.</span></h1>
+        <div class="joke-area" aria-live="polite" aria-atomic="true">
+          <span class="quote-mark" aria-hidden="true">“</span>
+          <p id="joke" class="joke-text">Ready for a giggle?</p>
+        </div>
+        <p id="status" class="status" role="status">Tap the button and meet your next favorite joke.</p>
+        <button id="joke-button" class="joke-button" type="button">
+          <span>Make me laugh</span>
+          <span class="button-icon" aria-hidden="true">↗</span>
+        </button>
+        <p class="credit">Random dad jokes, courtesy of <a href="https://icanhazdadjoke.com/" target="_blank" rel="noreferrer">icanhazdadjoke.com</a></p>
+      </section>
+      <footer>Good vibes, no punchline required.</footer>
+    </main>
+  </body>
+</html>
